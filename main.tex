@@ -192,11 +192,11 @@ The server's role involves receiving a JSON representation of DOM elements, upon
 Following the primary execution phase for context preparation, the server promptly stores a vector representation of the visited website. This vectorized model facilitates rapid and efficient communication with the AI, which is powered by a large language model (LLM). The content is queried via the vector database using Retrieval-Augmented Generation (RAG), enabling the identification of specific portions of the HTML code necessary for various tasks solicited by users. It subsequently returns executable actions via JavaScript. The frontend, equipped with this information, utilizes JavaScript commands to perform tasks on behalf of visually impaired users.
 
 
-\begin{figure}[h]
+\begin{figure*}[h]
 \centerline{\includegraphics[width=\linewidth]{images/img1.png}}
 \caption{Simplification of the Backend - Frontend Communication.}
 \label{fig1}
-\end{figure}
+\end{figure*}
 
 \section{Prototype Demonstration}\label{demo}
 
