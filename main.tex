@@ -44,9 +44,9 @@ Web Accessibility, LLM, Accessibility DOM, Human-Computer Interaction, Context-A
 
 \section{Introduction}
 
-Despite the long-standing availability of web accessibility guidelines and assistive technologies, visually impaired users continue to face substantial challenges in navigating and interacting with contemporary websites. These challenges persist even as awareness and technological capabilities have advanced. Notably, 88\% of websites on the World Wide Web are still not accessible, reflecting a persistent gap between inclusive design principles and their real-world application \cite{b2}.
+Despite the long-standing availability of web accessibility guidelines and assistive technologies, visually impaired users continue to face substantial challenges in navigating and interacting with contemporary websites. These challenges persist even as awareness and technological capabilities have advanced. Notably, 88\% of websites on the World Wide Web are still not accessible, reflecting a persistent gap between inclusive design principles and their real-world application \cite{webaccess2024}.
 
-A key reason for this disconnect lies in the limitations of traditional assistive tools such as screen readers. These systems rely on linear content interpretation, which struggles with the complexity and interactivity of modern web experiences—particularly on platforms that depend on multimedia content, multi-step forms, or dynamically updated dashboards. Compounding the issue is the inconsistent implementation of accessibility standards such as the Web Content Accessibility Guidelines (WCAG), most recently updated with WCAG 3.0 in 2024. While these guidelines offer a robust framework for accessible design, their application often falls short due to a lack of developer expertise, improper use of ARIA tags, and a prevailing focus on visual aesthetics rather than semantic clarity \cite{b1, b6}.
+A key reason for this disconnect lies in the limitations of traditional assistive tools such as screen readers. These systems rely on linear content interpretation, which struggles with the complexity and interactivity of modern web experiences—particularly on platforms that depend on multimedia content, multi-step forms, or dynamically updated dashboards. Compounding the issue is the inconsistent implementation of accessibility standards such as the Web Content Accessibility Guidelines (WCAG), most recently updated with WCAG 3.0 in 2024. While these guidelines offer a robust framework for accessible design, their application often falls short due to a lack of developer expertise, improper use of ARIA tags, and a prevailing focus on visual aesthetics rather than semantic clarity \cite{gbd2021, wcagchallenges2025}.
 
 Recent advancements in context-aware technologies—such as Large Language Models (LLMs), Computer Vision, and Machine Learning—introduce new possibilities for bridging this accessibility gap. These technologies can supplement traditional assistive tools by acting as intelligent agents capable of interpreting, restructuring, and interacting with web content in real-time. Such systems can dynamically adapt interfaces to align with users' goals, offering not only improved content understanding but also richer forms of interaction.
 
@@ -57,20 +57,20 @@ The remainder of this paper is organized as follows: Section II \ref{review} rev
 
 \section{Literature Review}\label{review}
 
-Multiple studies over the past two decades have documented how screen readers process web pages strictly in a linear sequence, forcing visually‑impaired users to traverse headings, menus, and decorative elements before reaching relevant content. Large‑scale audits continue to report widespread keyboard‑navigation barriers, even on sites that advertise compliance with success criteria in WCAG 2.x and the 2024 WCAG 3.0 draft \cite{b4,b6}. Empirical user observations show that the absence of semantic grouping leads to excessive keystrokes and cognitive overload when interacting with dashboards, multi‑column news layouts, and e‑commerce grids. Despite incremental improvements in screen‑reader software, the underlying linear traversal model remains unchanged—leaving the fundamental navigational burden on the user.
+Multiple studies over the past two decades have documented how screen readers process web pages strictly in a linear sequence, forcing visually‑impaired users to traverse headings, menus, and decorative elements before reaching relevant content. Large‑scale audits continue to report widespread keyboard‑navigation barriers, even on sites that advertise compliance with success criteria in WCAG 2.x and the 2024 WCAG 3.0 draft \cite{kerdar2024,wcagchallenges2025}. Empirical user observations show that the absence of semantic grouping leads to excessive keystrokes and cognitive overload when interacting with dashboards, multi‑column news layouts, and e‑commerce grids. Despite incremental improvements in screen‑reader software, the underlying linear traversal model remains unchanged—leaving the fundamental navigational burden on the user.
 
-Accessible design guidelines require developers to supply meaningful alternative text, ARIA roles, and programmatic relationships, yet field surveys reveal that these elements are either missing or optimised for search‑engine ranking rather than human comprehension \cite{b5}. Where alt text is present, it is often terse (“image1”) or redundant with surrounding captions, providing little help in grasping complex visuals such as charts, infographics, or hero banners. Even on sites that partially implement WCAG techniques, dynamic content injected by third‑party ad networks or CMS templates escapes validation, breaking reading order and semantic context \cite{b6}. As a result, visually‑impaired users must infer meaning from fragments that were never authored with their experience in mind.
+Accessible design guidelines require developers to supply meaningful alternative text, ARIA roles, and programmatic relationships, yet field surveys reveal that these elements are either missing or optimised for search‑engine ranking rather than human comprehension \cite{wcag2023}. Where alt text is present, it is often terse ("image1") or redundant with surrounding captions, providing little help in grasping complex visuals such as charts, infographics, or hero banners. Even on sites that partially implement WCAG techniques, dynamic content injected by third‑party ad networks or CMS templates escapes validation, breaking reading order and semantic context \cite{wcagchallenges2025}. As a result, visually‑impaired users must infer meaning from fragments that were never authored with their experience in mind.
 
-Recent prototypes illustrate how Large Language Models (LLMs), computer vision, and DOM automation can enrich accessibility beyond traditional screen readers. Commercial and research extensions now parse shopping pages to surface product attributes in a simplified view, reducing navigation steps \cite{b7}. Task‑oriented agents powered by LLMs translate natural‑language commands into browser actions, demonstrating promise in filling out forms, filtering tables, or performing multi‑step tasks \cite{b8,b9}. While these systems validate the feasibility of AI‑mediated assistance, they remain domain‑specific, rely on brittle heuristics, or lack an integrated mechanism for maintaining conversational context across page transitions.
+Recent prototypes illustrate how Large Language Models (LLMs), computer vision, and DOM automation can enrich accessibility beyond traditional screen readers. Commercial and research extensions now parse shopping pages to surface product attributes in a simplified view, reducing navigation steps \cite{prakash2024}. Task‑oriented agents powered by LLMs translate natural‑language commands into browser actions, demonstrating promise in filling out forms, filtering tables, or performing multi‑step tasks \cite{kodandaram2024,mehendale2024}. While these systems validate the feasibility of AI‑mediated assistance, they remain domain‑specific, rely on brittle heuristics, or lack an integrated mechanism for maintaining conversational context across page transitions.
 
 \subsection*{Synthesis and Identified Gaps}
 
 Taken together, the literature confirms that technical progress has not yet resolved several critical barriers:
 
 \begin{enumerate}
-\item \textbf{Non‑linear navigation is still unsupported.} Screen readers continue to expose content in a purely sequential manner, forcing users through irrelevant elements before they reach task‑relevant information \cite{b4,b6}.  
-\item \textbf{Semantic context for visual content is insufficient.} Alt text and ARIA labels are inconsistently authored, providing at best superficial descriptions that fail to convey rich visual meaning \cite{b5,b6}.  
-\item \textbf{General‑purpose, task‑driven interaction remains elusive.} AI‑augmented tools demonstrate success in narrow domains but do not yet offer a unified solution for complex, cross‑site workflows \cite{b7,b8,b9}.  
+\item \textbf{Non‑linear navigation is still unsupported.} Screen readers continue to expose content in a purely sequential manner, forcing users through irrelevant elements before they reach task‑relevant information \cite{kerdar2024,wcagchallenges2025}.  
+\item \textbf{Semantic context for visual content is insufficient.} Alt text and ARIA labels are inconsistently authored, providing at best superficial descriptions that fail to convey rich visual meaning \cite{wcag2023,wcagchallenges2025}.  
+\item \textbf{General‑purpose, task‑driven interaction remains elusive.} AI‑augmented tools demonstrate success in narrow domains but do not yet offer a unified solution for complex, cross‑site workflows \cite{prakash2024,kodandaram2024,mehendale2024}.  
 \end{enumerate}
 
 Addressing these gaps motivates the multimodal, dialog‑centric system presented in this paper, which combines vision‑language reasoning, contextual DOM restructuring, and automated interaction execution to deliver an accessible yet fully interactive web experience for visually‑impaired users.
@@ -79,7 +79,7 @@ Addressing these gaps motivates the multimodal, dialog‑centric system presente
 
 \section{Proposed System Overview}
 
-While browsing the internet, users rely on software applications capable of facilitating data exchange with cloud servers via the Hypertext Transfer Protocol (HTTP), ultimately acquiring Hypertext content formatted in Hypertext Markup Language (HTML). These applications convert the textual representation of web pages into a visual format. These software applications are denominated as web browsers. At present, Google Chrome constitutes the primary browser utilized within desktop environments, accounting for a 66\% \cite{b3} market share. Conversely, Safari is predominantly used on mobile platforms employed by 22\% \cite{b3} of mobile users.
+While browsing the internet, users rely on software applications capable of facilitating data exchange with cloud servers via the Hypertext Transfer Protocol (HTTP), ultimately acquiring Hypertext content formatted in Hypertext Markup Language (HTML). These applications convert the textual representation of web pages into a visual format. These software applications are denominated as web browsers. At present, Google Chrome constitutes the primary browser utilized within desktop environments, accounting for a 66\% \cite{browserstats2025} market share. Conversely, Safari is predominantly used on mobile platforms employed by 22\% \cite{browserstats2025} of mobile users.
 
 Web browsers have evolved to facilitate applications that function in conjunction with the product through the utilization of browser APIs. These applications, known as extensions, are installable within browsers and serve to augment the overall capabilities of the browser. Extensions enable developers to create enhancements for standard navigation, facilitating features such as text grammar correction, ad blockers, and other mechanisms. In this project, extensions are employed to interact with the Document Object Model (DOM), which is the technical representation of elements on a web page in browsers, as well as the Accessibility Tree, which shares the same representation but is focused on what text-to-speech mechanisms utilize to convert content for visually impaired users.
 
@@ -94,7 +94,7 @@ The CME interrogates the scene graph, selects nodes pertinent to the task in pro
 
 \subsection{Conversational Plan Manager (CPM)}
 
-The CPM runs a mixed‑initiative chat: it elicits the user’s intent, decomposes it into subtasks using LLM reasoning, and writes an executable plan with checkpoint markers into the log.
+The CPM runs a mixed‑initiative chat: it elicits the user's intent, decomposes it into subtasks using LLM reasoning, and writes an executable plan with checkpoint markers into the log.
 
 \subsection{Multimodal Interaction Executor (MIE)}
 
@@ -112,11 +112,11 @@ The MIE iterates through the plan, emitting OS‑level events (e.g., pyautogui c
 \hline
 1 & Visual understanding of the current page & Visual‑Layout Interpreter (VLI) & Parses the rendered page bitmap/DOM into a structured semantic graph usable by language and planning components. \\
 \hline
-2 & Task‑aware presentation of information & Contextual Modification Engine (CME) & Re‑orders and summarizes page content according to the user’s current goal (e.g., “browse headlines”, “locate checkout button”). \\
+2 & Task‑aware presentation of information & Contextual Modification Engine (CME) & Re‑orders and summarizes page content according to the user's current goal (e.g., "browse headlines", "locate checkout button"). \\
 \hline
-3 & Dialogic intent capture \& planning & Conversational Plan Manager (CPM) & Conducts a mixed‑initiative dialog to clarify the user’s objective, decomposes it into an executable plan, and maintains a progress log. \\
+3 & Dialogic intent capture \& planning & Conversational Plan Manager (CPM) & Conducts a mixed‑initiative dialog to clarify the user's objective, decomposes it into an executable plan, and maintains a progress log. \\
 \hline
-4 & Autonomous action execution & Multimodal Interaction Executor (MIE) & Carries out the CPM’s plan (clicks, typing, drag‑and‑drop, drawing), and after each step re‑invokes the VLI to verify success or recover. \\
+4 & Autonomous action execution & Multimodal Interaction Executor (MIE) & Carries out the CPM's plan (clicks, typing, drag‑and‑drop, drawing), and after each step re‑invokes the VLI to verify success or recover. \\
 \hline
 \end{tabular}
 \vspace{0.5cm}
@@ -140,11 +140,11 @@ In this scenario, we are modeling the basic process of accessing a news website 
 \hline
 \textbf{Phase} & \textbf{Module Sequence} \\
 \hline
-Intent capture & CPM → user: “What would you like to do?” → user: “Read today’s headlines.” \\
+Intent capture & CPM → user: "What would you like to do?" → user: "Read today's headlines." \\
 \hline
 Context analysis & VLI parses home page; CME adapts headline list. \\
 \hline
-Choice \& plan & user: “Open the article about the lunar eclipse.” → CPM drafts plan, seeks confirmation. \\
+Choice \& plan & user: "Open the article about the lunar eclipse." → CPM drafts plan, seeks confirmation. \\
 \hline
 Execution \& feedback & MIE clicks headline; VLI validates article view; CME summarizes article; loop continues. \\
 \hline
