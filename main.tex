@@ -207,40 +207,45 @@ The presented example workflow aims to elucidate a straightforward task that can
 
  As shown in \autoref{fig2}, the website incorporates certain guidelines from the WCAG; however, it presents a challenge from the outset due to its intricate navigation structure, utilization of video content, and inadequate support for keyboard navigation.
 
-\begin{figure}[h]
-\centerline{\includegraphics[width=\linewidth]{images/1.png}}
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{images/1.png}
 \caption{Skywak Landing Page Printscreen}
 \label{fig2}
 \end{figure}
 
 During navigation, users may encounter issues such as multiple layers of the same image being employed to facilitate expedited visual rendering for sighted users. However, in the accessibility DOM, these images are rendered multiple times. Furthermore, the alternative descriptions provided are brief and fail to deliver sufficient context regarding the intended event (see \autoref{fig2}).
 
-\begin{figure}[h]
-\centerline{\includegraphics[width=\linewidth]{images/2.png}}
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{images/2.png}
 \caption{Page Use of Alternative Tags and Images}
 \label{fig3}
 \end{figure}
 
 After the page loading, extension starts rendering and parsing DOM elements, creating a new element with the summary of the page (see \autoref{fig4}), that element is going to be rapidly parsed by the TTS assistive tools providing the user the ability to Scanning and Skimming content before trying to accomplish tasks in the page.
 
-\begin{figure}[h]
-\centerline{\includegraphics[width=\linewidth]{images/3.png}}
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{images/3.png}
 \caption{Summary Created by the Extension}
 \label{fig4}
 \end{figure}
 
 The extension subsequently analyzes images and visual elements, generating WCAG-compliant alternative tags and correcting ARIA tags to enhance navigability (see \autoref{fig5}). It removes superfluous elements such as advertisements, visual embellishments, and other non-essential information from the DOM, thereby modifying the accessibility tree. Every tag will receive a new data-vix id in which the system will trust to query data to perform task.
 
-\begin{figure}[h]
-\centerline{\includegraphics[width=\linewidth]{images/4.png}}
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{images/4.png}
 \caption{Parsed DOM Element}
 \label{fig5}
 \end{figure}
 
 Ultimately, users are now able to initiate a task via the extension, whereby the extension will parse the task and execute the necessary commands through JavaScript operations that engage with the webpage and the DOM (see \autoref{fig6}).
 
-\begin{figure}[h]
-\centerline{\includegraphics[width=\linewidth]{images/5.png}}
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{images/5.png}
 \caption{New Page with a new task of buying tickets}
 \label{fig6}
 \end{figure}
