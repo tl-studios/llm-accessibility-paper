@@ -42,7 +42,7 @@ A working prototype deployed on a highly interactive tourism website demonstrate
 Web Accessibility, LLM, Accessibility DOM, Human-Computer Interaction, Context-Aware Systems
 \end{IEEEkeywords}
 
-\section{Introduction}
+\section{Introduction}\label{intro}
 
 Despite the long-standing availability of web accessibility guidelines and assistive technologies, visually impaired users continue to face substantial challenges in navigating and interacting with contemporary websites. These challenges persist even as awareness and technological capabilities have advanced. Notably, 88\% of websites on the World Wide Web are still not accessible, reflecting a persistent gap between inclusive design principles and their real-world application \cite{webaccess2024}.
 
@@ -52,7 +52,7 @@ Recent advancements in context-aware technologies—such as LLM, Computer Vision
 
 In this work, we present a browser-based accessibility system powered by a multimodal architecture that integrates vision-language reasoning, contextual manipulation, and dialog-based task planning. Our system, implemented as a Google Chrome extension, enhances both the structure and semantics of web content. This system operates collaboratively across the Document Object Model (DOM) and the browser's Accessibility Tree, providing visually impaired users with the ability to more efficiently browse, comprehend, and interact with web content.
 
-The remainder of this paper is organized as follows: Section II \ref{review} reviews related work and accessibility technologies; Section III details the proposed system and its modular architecture; Section IV describes the implementation methodology; Section V presents a practical usage scenario demonstrating the system in action; and Section VI concludes with findings, limitations, and directions for future research.
+The remainder of this paper is organized as follows: \autoref{review} reviews related work and accessibility technologies; \autoref{system} details the proposed system and its modular architecture; \autoref{methodology} describes the implementation methodology; \autoref{demo} presents a practical usage scenario demonstrating the system in action; and \autoref{conclusion} concludes with findings, limitations, and directions for future research.
 
 
 \section{Literature Review}\label{review}
@@ -77,7 +77,7 @@ Addressing these gaps motivates the multimodal, dialog‑centric system presente
 
 
 
-\section{Proposed System Overview}
+\section{Proposed System Overview}\label{system}
 
 While browsing the internet, users rely on software applications capable of facilitating data exchange with cloud servers via the Hypertext Transfer Protocol (HTTP), ultimately acquiring Hypertext content formatted in Hypertext Markup Language (HTML). These applications convert the textual representation of web pages into a visual format. These software applications are denominated as web browsers. At present, Google Chrome constitutes the primary browser utilized within desktop environments, accounting for a 66\% \cite{browserstats2025} market share. Conversely, Safari is predominantly used on mobile platforms employed by 22\% \cite{browserstats2025} of mobile users.
 
@@ -153,7 +153,7 @@ Execution \& feedback & MIE clicks headline; VLI validates article view; CME sum
 \vspace{0.5cm}
 \end{table}
 
-\section{Methodology}
+\section{Methodology}\label{methodology}
 
 An advanced architectural technology has been formulated to engineer a concise yet efficacious instrument aimed at augmenting navigational capabilities for individuals with visual impairments. This architecture can be methodically categorized into two primary structures: Front-end Development and Back-end Development.
 
@@ -198,7 +198,7 @@ Following the primary execution phase for context preparation, the server prompt
 \label{fig1}
 \end{figure}
 
-\section{Prototype Demonstration}
+\section{Prototype Demonstration}\label{demo}
 
 The presented example workflow aims to elucidate a straightforward task that can be performed by any user seeking to obtain fundamental information regarding the acquisition of data. In this prototype demonstration, we will simulate the challenges encountered by a visually impaired individual in comprehending the complete contextual information of the skywalk attraction at the CN Tower, a prominent landmark in Toronto. Following the installation of the Google Chrome extension, the DOM elements will undergo modification, resulting in alterations to the accessibility tree, as illustrated in \autoref{fig1}.
 
@@ -248,7 +248,7 @@ Ultimately, users are now able to initiate a task via the extension, whereby the
 The user's task of acquiring information about the event is completed, and the user is redirected through the extension workforce to a new page, where the CN Tower is presented for the task of purchasing tickets (see \autoref{fig6}). The system is available for repeated use to facilitate the acquisition of tickets.
 
 
-\section{Conclusion}
+\section{Conclusion}\label{conclusion}
 
 This paper has addressed critical and persistent accessibility challenges experienced by visually impaired users navigating modern web environments. Through integrating advances in LLMs, computer vision, and dynamic DOM manipulation, we introduced a multimodal accessibility system designed as a browser extension to significantly enhance web interaction experiences for visually impaired users.
 
@@ -261,7 +261,7 @@ Future research directions are clear and critical for achieving broader adoption
 Ultimately, while technical innovation forms the core of our approach, the broader vision remains creating a universally accessible internet. Emphasizing user-centered iterative development, ongoing collaboration, and inclusive design principles will ensure that advancements in AI technology translate meaningfully into equitable digital experiences for all users.
 
 
-\section{Use of AI Disclosure}
+\section{Use of AI Disclosure}\label{ai-disclosure}
 No artificial intelligence tools were employed in the generation of the content presented in this document. Throughout the drafting process, the Overleaf IEEE AI Assistant was utilized to review grammatical accuracy and to offer feedback on writing style and consistency, thereby suggesting improvements to the text and making modifications to the content. During the coding phase of the project, Claude AI, version 3.5, was employed to assist developers in coding tasks and error resolution.
 
 
