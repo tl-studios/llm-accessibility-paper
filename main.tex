@@ -195,9 +195,9 @@ The server's role involves receiving a JSON representation of DOM elements, upon
 Following the primary execution phase for context preparation, the server promptly stores a vector representation of the visited website. This vectorized model facilitates rapid and efficient communication with the AI, which is powered by a LLM. The content is queried via the vector database using Retrieval-Augmented Generation (RAG), enabling the identification of specific portions of the HTML code necessary for various tasks solicited by users. It subsequently returns executable actions via JavaScript. The frontend, equipped with this information, utilizes JavaScript commands to perform tasks on behalf of visually impaired users.
 
 \begin{figure}[h]
-\centerline{\includegraphics[width=\columnwidth]{images/img1.png}}
+\centerline{\includegraphics[width=\columnwidth]{images/CommuncationDiagram.pdf}}
 \caption{Simplification of the Backend - Frontend Communication.}
-\label{fig1}
+\label{Figure 1}
 \end{figure}
 
 \section{Prototype Demonstration}\label{demo}
@@ -213,7 +213,7 @@ The presented example workflow aims to elucidate a straightforward task that can
 \centering
 \includegraphics[width=\columnwidth]{images/1.png}
 \caption{Skywak Landing Page Printscreen}
-\label{fig2}
+\label{Figure 2}
 \end{figure}
 
 During navigation, users may encounter issues such as multiple layers of the same image being employed to facilitate expedited visual rendering for sighted users. However, in the accessibility DOM, these images are rendered multiple times. Furthermore, the alternative descriptions provided are brief and fail to deliver sufficient context regarding the intended event (see \autoref{fig2}).
@@ -222,7 +222,7 @@ During navigation, users may encounter issues such as multiple layers of the sam
 \centering
 \includegraphics[width=\columnwidth]{images/2.png}
 \caption{Page Use of Alternative Tags and Images}
-\label{fig3}
+\label{Figure 3}
 \end{figure}
 
 After the page loading, extension starts rendering and parsing DOM elements, creating a new element with the summary of the page (see \autoref{fig4}), that element is going to be rapidly parsed by the TTS assistive tools providing the user the ability to Scanning and Skimming content before trying to accomplish tasks in the page.
@@ -231,7 +231,7 @@ After the page loading, extension starts rendering and parsing DOM elements, cre
 \centering
 \includegraphics[width=\columnwidth]{images/3.png}
 \caption{Summary Created by the Extension}
-\label{fig4}
+\label{Figure 4}
 \end{figure}
 
 The extension subsequently analyzes images and visual elements, generating WCAG-compliant alternative tags and correcting ARIA tags to enhance navigability (see \autoref{fig5}). It removes superfluous elements such as advertisements, visual embellishments, and other non-essential information from the DOM, thereby modifying the accessibility tree. Every tag will receive a new data-vix id in which the system will trust to query data to perform task.
@@ -240,7 +240,7 @@ The extension subsequently analyzes images and visual elements, generating WCAG-
 \centering
 \includegraphics[width=\columnwidth]{images/4.png}
 \caption{Parsed DOM Element}
-\label{fig5}
+\label{Figure 5}
 \end{figure}
 
 Ultimately, users are now able to initiate a task via the extension, whereby the extension will parse the task and execute the necessary commands through JavaScript operations that engage with the webpage and the DOM (see \autoref{fig6}).
@@ -249,7 +249,7 @@ Ultimately, users are now able to initiate a task via the extension, whereby the
 \centering
 \includegraphics[width=\columnwidth]{images/5.png}
 \caption{New Page with a new task of buying tickets}
-\label{fig6}
+\label{Figure 6}
 \end{figure}
 
 The user's task of acquiring information about the event is completed, and the user is redirected through the extension workforce to a new page, where the CN Tower is presented for the task of purchasing tickets (see \autoref{fig6}). The system is available for repeated use to facilitate the acquisition of tickets.
