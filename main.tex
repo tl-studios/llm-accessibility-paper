@@ -80,18 +80,18 @@ Addressing these gaps requires a comprehensive approach that builds upon existin
 
 \section{Proposed System Overview}\label{system}
 
-While browsing the internet, users rely on software applications capable of facilitating data exchange with cloud servers via the Hypertext Transfer Protocol (HTTP), ultimately acquiring Hypertext content formatted in Hypertext Markup Language (HTML). These applications convert the textual representation of web pages into a visual format. These software applications are denominated as web browsers. At present, Google Chrome constitutes the primary browser utilized within desktop environments, accounting for a 66\% \cite{browserstats2025} market share. Conversely, Safari is predominantly used on mobile platforms employed by 22\% \cite{browserstats2025} of mobile users.
+While browsing the internet, users rely on software applications capable of facilitating data exchange with cloud servers via the Hypertext Transfer Protocol (HTTP), ultimately acquiring Hypertext content formatted in Hypertext Markup Language (HTML). These applications convert the textual representation of web pages into a visual format. These software applications are denominated as web browsers. At present, Google Chrome constitutes the primary browser utilized within desktop environments, accounting for a 66\% market share. Conversely, Safari is predominantly used on mobile platforms employed by 22\%  of mobile users\cite{browserstats2025}.
 
-Web browsers have evolved to facilitate applications that function in conjunction with the product through the utilization of browser APIs. These applications, known as extensions, are installable within browsers and serve to augment the overall capabilities of the browser. Extensions enable developers to create enhancements for standard navigation, facilitating features such as text grammar correction, ad blockers, and other mechanisms. In this project, extensions are employed to interact with the DOM, which is the technical representation of elements on a web page in browsers, as well as the Accessibility Tree, which shares the same representation but is focused on what text-to-speech (TTS) mechanisms utilize to convert content for visually impaired users.
+Web browsers have evolved to facilitate applications that function in conjunction with the product through the utilization of browser APIs. These applications, known as extensions, are installable within browsers and serve to augment the overall capabilities of the browser. Extensions enable developers to create enhancements for standard navigation, facilitating features such as text grammar correction, ad blockers, and other mechanisms. In this project, extensions are employed to interact with the DOM, which is the technical representation of elements on a web page in browsers, as well as the Accessibility Tree, which shares the same representation but is focused on what screen readers (SR) mechanisms utilize to convert content for visually impaired users.
 
 As shown in \autoref{tab:architecture}, our architecture orchestrates four cooperative modules around a shared task graph and state log. The LLM serves as the reasoning core, translating between raw pixels/DOM, natural‑language dialog, and low‑level interaction events.
 
 \subsection{Visual‑Layout Interpreter (VLI)}
-The VLI ingests periodic screenshots plus DOM snapshots, produces a hierarchical scene graph (regions, widgets, affordances), and assigns semantic tags using vision‑language prompting.
+The VLI ingests periodic images snapshots plus DOM representation, produces a hierarchical scene graph, and assigns semantic tags using vision‑language prompting.
 
 \subsection{Contextual Modification Engine (CME)}
 
-The CME interrogates the scene graph, selects nodes pertinent to the task in progress, and adjusts the DOM elements with the objective of producing a more refined version of the Accessibility Tree that incorporates contextual descriptions alongside the application of WCAG compliance features, such as ARIA tags, CSS adjustments, and tag modifications.
+The CME interrogates the scene graph, selects nodes pertinent to the navigation, and adjusts the DOM elements with the objective of producing a more refined version of the Accessibility Tree that incorporates contextual descriptions alongside the application of WCAG compliance features, such as ARIA tags, CSS adjustments, and tag modifications.
 
 \subsection{Conversational Plan Manager (CPM)}
 
@@ -108,13 +108,13 @@ The MIE iterates through the plan, emitting OS‑level events (e.g., pyautogui c
 \label{tab:architecture}
 \small
 \renewcommand{\arraystretch}{1.5}
-\begin{tabular}{|p{2.5cm}|p{2.5cm}|p{4cm}|}
+\begin{tabular}{|p{2.5cm}|p{0.8cm}|p{4cm}|}
 \hline
-\textbf{Functional Role} & \textbf{Suggested Name} & \textbf{Rationale (concise)} \\
+\textbf{Functional Role} & \textbf{Name} & \textbf{Rationale (concise)} \\
 \hline
 Visual understanding of the current page & VLI & Parses the rendered page DOM into a structured semantic graph usable by language and planning components. \\
 \hline
-Task‑aware presentation of information & CME & Creates a new DOM with WCAG compliant elements and ARIA tags. \\
+Modify DOM Elements & CME & Creates a new DOM with WCAG compliant elements and ARIA tags. \\
 \hline
 Dialogic intent capture \& planning & CPM & Conducts a mixed‑initiative dialog to clarify the user's objective, decomposes it into an executable plan, and maintains a progress log. \\
 \hline
@@ -168,11 +168,13 @@ Upon the rendering of a new page, the Front-end system detects alterations in th
 
 Since the technologies underpinning LLM depend on the volume of input text, which is converted into tokens — the fundamental units of LLM data — it is crucial that the frontend system sanitizes the input to supply the data interpreter with only essential information. Failure to do so necessitates that the content be divided into smaller segments for processing. This segmentation can result in increased rendering time of contextual elements, elevated server costs, and potential loss of context.
 
-Subsequent to the purification of elements, the front-end will establish communication with the back-end modules through fundamental HTTPS requests. These modules will furnish the requisite context and information to be elaborated upon in the back-end subsection of this section. The front-end will then transform this contextual information into DOM modifications aimed directly at engaging with the Accessibility Tree, thereby enhancing the end-user experience. Furthermore, the extension will inject HTML elements into any web page, facilitating user interaction with the extension system, thereby enabling effective user-system communication and task execution by the system on behalf of the user.
+To generate a cleaner version of the DOM, an initial preprocessing step was employed to exclude advertising-related elements. This was achieved through the application of a set of community-maintained blacklist rules, implemented via a custom reimplementation of a DOM-cleaning library designed to apply these filtering criteria. Following this sanitization phase, the Readability JS library—originally developed by Mozilla for Firefox—was utilized to further refine the DOM by removing non-essential nodes, thereby preserving only the content most relevant to user navigation and comprehension.
+
+Subsequent to the purification of elements, the front-end will establish communication with the back-end modules through fundamental HTTPS requests using the fetch library. These modules will furnish the requisite context and information to be elaborated upon in the back-end subsection of this section. The front-end will then transform this contextual information into DOM modifications aimed directly at engaging with the Accessibility Tree, thereby enhancing the end-user experience. Furthermore, the extension will inject HTML elements into any web page, facilitating user interaction with the extension system, thereby enabling effective user-system communication and task execution by the system on behalf of the user.
 
 \subsection{Back-end Structure}
 
-The backend system is comprised of a Flask Python server configured to receive messages on port 8080. These messages are processed and converted into executable tasks for the system, resulting in outputs that are subsequently utilized by the Front-end in response to the queried messages. 
+The backend system is comprised of a dockerized Flask Python server configured to receive messages on a web accessible endpoint. These messages are processed and converted into executable tasks for the system, resulting in outputs that are subsequently utilized by the Front-end in response to the queried messages. 
 
 Although the backend encompasses a variety of techniques, it is essential to articulate four principal modules to provide clarity regarding its functionality.
 
@@ -190,14 +192,13 @@ The server's role involves receiving a JSON representation of DOM elements, upon
 
 \subsubsection{RAG Conversational Task Executer Methodology}
 
-Following the primary execution phase for context preparation, the server promptly stores a vector representation of the visited website. This vectorized model facilitates rapid and efficient communication with the AI, which is powered by a large language model (LLM). The content is queried via the vector database using Retrieval-Augmented Generation (RAG), enabling the identification of specific portions of the HTML code necessary for various tasks solicited by users. It subsequently returns executable actions via JavaScript. The frontend, equipped with this information, utilizes JavaScript commands to perform tasks on behalf of visually impaired users.
+Following the primary execution phase for context preparation, the server promptly stores a vector representation of the visited website. This vectorized model facilitates rapid and efficient communication with the AI, which is powered by a LLM. The content is queried via the vector database using Retrieval-Augmented Generation (RAG), enabling the identification of specific portions of the HTML code necessary for various tasks solicited by users. It subsequently returns executable actions via JavaScript. The frontend, equipped with this information, utilizes JavaScript commands to perform tasks on behalf of visually impaired users.
 
-
-\begin{figure*}[h]
-\centerline{\includegraphics[width=\linewidth]{images/img1.png}}
+\begin{figure}[h]
+\centerline{\includegraphics[width=\columnwidth]{images/img1.png}}
 \caption{Simplification of the Backend - Frontend Communication.}
 \label{fig1}
-\end{figure*}
+\end{figure}
 
 \section{Prototype Demonstration}\label{demo}
 
