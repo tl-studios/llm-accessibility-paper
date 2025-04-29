@@ -195,64 +195,65 @@ The server's role involves receiving a JSON representation of DOM elements, upon
 Following the primary execution phase for context preparation, the server promptly stores a vector representation of the visited website. This vectorized model facilitates rapid and efficient communication with the AI, which is powered by a LLM. The content is queried via the vector database using Retrieval-Augmented Generation (RAG), enabling the identification of specific portions of the HTML code necessary for various tasks solicited by users. It subsequently returns executable actions via JavaScript. The frontend, equipped with this information, utilizes JavaScript commands to perform tasks on behalf of visually impaired users.
 
 \begin{figure}[h]
-\centerline{\includegraphics[width=\columnwidth]{images/CommuncationDiagram.pdf}}
+\centering
+\includegraphics[width=\columnwidth]{images/CommuncationDiagram.pdf}
 \caption{Simplification of the Backend - Frontend Communication.}
-\label{Figure 1}
+\label{fig:communication}
 \end{figure}
 
 \section{Prototype Demonstration}\label{demo}
 
-The presented example workflow aims to elucidate a straightforward task that can be performed by any user seeking to obtain fundamental information regarding the acquisition of data. In this prototype demonstration, we will simulate the challenges encountered by a visually impaired individual in comprehending the complete contextual information of the skywalk attraction at the CN Tower, a prominent landmark in Toronto. Following the installation of the Google Chrome extension, the DOM elements will undergo modification, resulting in alterations to the accessibility tree, as illustrated in \autoref{fig1}.
+The presented example workflow aims to elucidate a straightforward task that can be performed by any user seeking to obtain fundamental information regarding the acquisition of data. In this prototype demonstration, we will simulate the challenges encountered by a visually impaired individual in comprehending the complete contextual information of the skywalk attraction at the CN Tower, a prominent landmark in Toronto. Following the installation of the Google Chrome extension, the DOM elements will undergo modification, resulting in alterations to the accessibility tree, as illustrated in \autoref{fig:communication}.
 
- Using this example we can prototype and display the proposed changes in the DOM. After using a basic google search about CN Tower Skywalk we encounter in the first result the following link:
- https://www.cntower.ca/brave-the-edgewalk
+Using this example we can prototype and display the proposed changes in the DOM. After using a basic google search about CN Tower Skywalk we encounter in the first result the following link:
+https://www.cntower.ca/brave-the-edgewalk
 
- As shown in \autoref{fig2}, the website incorporates certain guidelines from the WCAG; however, it presents a challenge from the outset due to its intricate navigation structure, utilization of video content, and inadequate support for keyboard navigation.
+As shown in \autoref{fig:skywalk}, the website incorporates certain guidelines from the WCAG; however, it presents a challenge from the outset due to its intricate navigation structure, utilization of video content, and inadequate support for keyboard navigation.
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{images/1.png}
 \caption{Skywak Landing Page Printscreen}
-\label{Figure 2}
+\label{fig:skywalk}
 \end{figure}
 
-During navigation, users may encounter issues such as multiple layers of the same image being employed to facilitate expedited visual rendering for sighted users. However, in the accessibility DOM, these images are rendered multiple times. Furthermore, the alternative descriptions provided are brief and fail to deliver sufficient context regarding the intended event (see \autoref{fig2}).
+During navigation, users may encounter issues such as multiple layers of the same image being employed to facilitate expedited visual rendering for sighted users. However, in the accessibility DOM, these images are rendered multiple times. Furthermore, the alternative descriptions provided are brief and fail to deliver sufficient context regarding the intended event (see \autoref{fig:alt_tags}).
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{images/2.png}
 \caption{Page Use of Alternative Tags and Images}
-\label{Figure 3}
+\label{fig:alt_tags}
 \end{figure}
 
-After the page loading, extension starts rendering and parsing DOM elements, creating a new element with the summary of the page (see \autoref{fig4}), that element is going to be rapidly parsed by the TTS assistive tools providing the user the ability to Scanning and Skimming content before trying to accomplish tasks in the page.
+After the page loading, extension starts rendering and parsing DOM elements, creating a new element with the summary of the page (see \autoref{fig:summary}), that element is going to be rapidly parsed by the TTS assistive tools providing the user the ability to Scanning and Skimming content before trying to accomplish tasks in the page.
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{images/3.png}
 \caption{Summary Created by the Extension}
-\label{Figure 4}
+\label{fig:summary}
 \end{figure}
 
-The extension subsequently analyzes images and visual elements, generating WCAG-compliant alternative tags and correcting ARIA tags to enhance navigability (see \autoref{fig5}). It removes superfluous elements such as advertisements, visual embellishments, and other non-essential information from the DOM, thereby modifying the accessibility tree. Every tag will receive a new data-vix id in which the system will trust to query data to perform task.
+The extension subsequently analyzes images and visual elements, generating WCAG-compliant alternative tags and correcting ARIA tags to enhance navigability (see \autoref{fig:parsed}). It removes superfluous elements such as advertisements, visual embellishments, and other non-essential information from the DOM, thereby modifying the accessibility tree. Every tag will receive a new data-vix id in which the system will trust to query data to perform task.
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{images/4.png}
 \caption{Parsed DOM Element}
-\label{Figure 5}
+\label{fig:parsed}
 \end{figure}
 
-Ultimately, users are now able to initiate a task via the extension, whereby the extension will parse the task and execute the necessary commands through JavaScript operations that engage with the webpage and the DOM (see \autoref{fig6}).
+Ultimately, users are now able to initiate a task via the extension, whereby the extension will parse the task and execute the necessary commands through JavaScript operations that engage with the webpage and the DOM (see \autoref{fig:task}).
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{images/5.png}
 \caption{New Page with a new task of buying tickets}
-\label{Figure 6}
+\label{fig:task}
 \end{figure}
 
-The user's task of acquiring information about the event is completed, and the user is redirected through the extension workforce to a new page, where the CN Tower is presented for the task of purchasing tickets (see \autoref{fig6}). The system is available for repeated use to facilitate the acquisition of tickets.
+The user's task of acquiring information about the event is completed, and the user is redirected through the extension workforce to a new page, where the CN Tower is presented for the task of purchasing tickets (see \autoref{fig:task}). The system is available for repeated use to facilitate the acquisition of tickets.
 
 
 \section{Conclusion}\label{conclusion}
