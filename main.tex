@@ -9,6 +9,7 @@
 \usepackage{xcolor}
 \usepackage{verbatim}
 \usepackage{hyperref}
+\usepackage{array}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -130,9 +131,9 @@ The MIE iterates through the plan, emitting OS‑level events (e.g., pyautogui c
 \label{tab:architecture}
 \small
 \renewcommand{\arraystretch}{1.3}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{1.2cm}|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{6cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{0.8cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4cm}|}
 \hline
-\textbf{Name} & \textbf{Functional Role} & \textbf{Rationale (concise)} \\
+\textbf{Name} & \textbf{Functional Role} & \textbf{Rationale} \\
 \hline
 \texttt{VLI} & Visual understanding of the current page & Parses the rendered page DOM into a structured semantic graph usable by language and planning components. \\
 \hline
