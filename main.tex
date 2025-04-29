@@ -76,8 +76,7 @@ Taken together, the literature confirms that technical progress has not yet reso
 \item \textbf{General‑purpose, task‑driven interaction remains elusive.} AI‑augmented tools demonstrate success in narrow domains but do not yet offer a unified solution for complex, cross‑site workflows \cite{prakash2024,kodandaram2024,mehendale2024}.  
 \end{enumerate}
 
-Addressing these gaps motivates the system based on the softwares currently used by the majority of people. Blind and Vision Loss (BLV) users. Using a methodology that consists in a combination of efforts to create a more useful and adaptative tool that can address more issues when navigating web.
-
+Addressing these gaps requires a comprehensive approach that builds upon existing assistive technologies while introducing innovative solutions. Our work focuses on developing a system that leverages the widespread adoption of screen readers and browser extensions among Blind and Vision Loss (BLV) users. By combining established accessibility tools with advanced AI capabilities, we aim to create a more adaptive and intuitive navigation experience. This methodology integrates multiple layers of assistance: enhancing semantic understanding through improved content interpretation, providing context-aware navigation options, and enabling task-oriented interactions through natural language processing. The resulting system seeks to bridge the gap between traditional accessibility tools and modern web interfaces, offering BLV users a more seamless and efficient way to interact with complex web content.
 
 \section{Proposed System Overview}\label{system}
 
@@ -103,27 +102,27 @@ The CPM runs a mixed‑initiative chat: it elicits the user's intent, decomposes
 The MIE iterates through the plan, emitting OS‑level events (e.g., pyautogui calls). After every action it requests an updated scene graph from the VLI to confirm success; discrepancies trigger CPM‑led replanning.
 
 
-\begin{table*}[ht]
+\begin{table}[t]
 \centering
 \caption{System Components and Their Roles}
 \label{tab:architecture}
 \small
 \renewcommand{\arraystretch}{1.5}
-\begin{tabular}{|p{0.5cm}|p{2cm}|p{2.5cm}|p{6cm}|}
+\begin{tabular}{|p{2.5cm}|p{2.5cm}|p{4cm}|}
 \hline
-\textbf{\#} & \textbf{Functional Role} & \textbf{Suggested Name} & \textbf{Rationale (concise)} \\
+\textbf{Functional Role} & \textbf{Suggested Name} & \textbf{Rationale (concise)} \\
 \hline
-1 & Visual understanding of the current page & Visual‑Layout Interpreter (VLI) & Parses the rendered page bitmap/DOM into a structured semantic graph usable by language and planning components. \\
+Visual understanding of the current page & VLI & Parses the rendered page DOM into a structured semantic graph usable by language and planning components. \\
 \hline
-2 & Task‑aware presentation of information & Contextual Modification Engine (CME) & Re‑orders and summarizes page content according to the user's current goal (e.g., "browse headlines", "locate checkout button"). \\
+Task‑aware presentation of information & CME & Creates a new DOM with WCAG compliant elements and ARIA tags. \\
 \hline
-3 & Dialogic intent capture \& planning & Conversational Plan Manager (CPM) & Conducts a mixed‑initiative dialog to clarify the user's objective, decomposes it into an executable plan, and maintains a progress log. \\
+Dialogic intent capture \& planning & CPM & Conducts a mixed‑initiative dialog to clarify the user's objective, decomposes it into an executable plan, and maintains a progress log. \\
 \hline
-4 & Autonomous action execution & Multimodal Interaction Executor (MIE) & Carries out the CPM's plan (clicks, typing, drag‑and‑drop, drawing), and after each step re‑invokes the VLI to verify success or recover. \\
+Autonomous action execution & MIE & Carries out the CPM's plan (clicks, typing, drag‑and‑drop, drawing), and after each step re‑invokes the VLI to verify success or recover. \\
 \hline
 \end{tabular}
 \vspace{0.5cm}
-\end{table*}
+\end{table}
 
 
 \subsection*{Example Workflow}
