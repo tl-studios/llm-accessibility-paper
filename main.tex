@@ -57,24 +57,26 @@ The remainder of this paper is organized as follows: \autoref{review} reviews re
 
 \section{Literature Review}\label{review}
 
-Multiple studies over the past two decades have documented how screen readers process web pages strictly in a linear sequence, forcing visually‑impaired users to traverse headings, menus, and decorative elements before reaching relevant content. Large‑scale audits continue to report widespread keyboard‑navigation barriers, even on sites that advertise compliance with success criteria in WCAG 2.x and the 2024 WCAG 3.0 draft \cite{kerdar2024,wcagchallenges2025}. Empirical user observations show that the absence of semantic grouping leads to excessive keystrokes and cognitive overload when interacting with dashboards, multi‑column news layouts, and e‑commerce grids. Despite incremental improvements in screen‑reader software, the underlying linear traversal model remains unchanged—leaving the fundamental navigational burden on the user.
+Multiple studies over the past two decades have documented how screen readers process web pages strictly in a linear sequence, forcing visually‑impaired users to traverse headings, menus, and decorative elements before reaching relevant content. Large‑scale audits continue to report widespread keyboard‑navigation barriers, even on sites that advertise compliance with success criteria in WCAG 2.x and the 2024 WCAG 3.0 draft \cite{wcagchallenges2025}. Empirical user observations show that the absence of semantic grouping leads to excessive keystrokes and cognitive overload when interacting with dashboards, multi‑column news layouts, and e‑commerce grids. Despite incremental improvements in screen‑reader software, the underlying linear traversal model remains unchanged—leaving the fundamental navigational burden on the user. \cite{ferdous2021semantic}
 
 Accessible design guidelines require developers to supply meaningful alternative text, ARIA roles, and programmatic relationships, yet field surveys reveal that these elements are either missing or optimised for search‑engine ranking rather than human comprehension \cite{wcag2023}. Where alt text is present, it is often terse ("image1") or redundant with surrounding captions, providing little help in grasping complex visuals such as charts, infographics, or hero banners. Even on sites that partially implement WCAG techniques, dynamic content injected by third‑party ad networks or CMS templates escapes validation, breaking reading order and semantic context \cite{wcagchallenges2025}. As a result, visually‑impaired users must infer meaning from fragments that were never authored with their experience in mind.
 
-Recent prototypes illustrate how LLM, computer vision, and DOM automation can enrich accessibility beyond traditional screen readers. Commercial and research extensions now parse shopping pages to surface product attributes in a simplified view, reducing navigation steps \cite{prakash2024}. Task‑oriented agents powered by LLMs translate natural‑language commands into browser actions, demonstrating promise in filling out forms, filtering tables, or performing multi‑step tasks \cite{kodandaram2024,mehendale2024}. While these systems validate the feasibility of AI‑mediated assistance, they remain domain‑specific, rely on brittle heuristics, or lack an integrated mechanism for maintaining conversational context across page transitions.
+Recent prototypes illustrate how LLM, computer vision, and DOM automation can enrich accessibility beyond traditional screen readers. Commercial and research extensions now parse shopping pages to surface product attributes in a simplified view, reducing navigation steps \cite{prakash2024}. Task‑oriented agents powered by LLMs translate natural‑language commands into browser actions, demonstrating promise in filling out forms, filtering tables, or performing multi‑step tasks  \cite{he2024webvoyager}.
+
+While these systems validate the feasibility of AI‑mediated assistance, they remain domain‑specific, rely on brittle heuristics, or lack an integrated mechanism for maintaining conversational context across page transitions.\cite{kodandaram2024,mehendale2024}
+
 
 \subsection*{Synthesis and Identified Gaps}
 
 Taken together, the literature confirms that technical progress has not yet resolved several critical barriers:
 
 \begin{enumerate}
-\item \textbf{Non‑linear navigation is still unsupported.} Screen readers continue to expose content in a purely sequential manner, forcing users through irrelevant elements before they reach task‑relevant information \cite{kerdar2024,wcagchallenges2025}.  
-\item \textbf{Semantic context for visual content is insufficient.} Alt text and ARIA labels are inconsistently authored, providing at best superficial descriptions that fail to convey rich visual meaning \cite{wcag2023,wcagchallenges2025}.  
+\item \textbf{Non‑linear navigation is still unsupported.} Screen readers continue to expose content in a purely sequential manner, forcing users through irrelevant elements before they reach task‑relevant information \cite{Babu_2013}.  
+\item \textbf{Semantic context for visual content is insufficient.} Alt text and ARIA labels are inconsistently authored, providing at best superficial descriptions that fail to convey rich visual meaning \cite{Chintalapati_2022}.  
 \item \textbf{General‑purpose, task‑driven interaction remains elusive.} AI‑augmented tools demonstrate success in narrow domains but do not yet offer a unified solution for complex, cross‑site workflows \cite{prakash2024,kodandaram2024,mehendale2024}.  
 \end{enumerate}
 
-Addressing these gaps motivates the multimodal, dialog‑centric system presented in this paper, which combines vision‑language reasoning, contextual DOM restructuring, and automated interaction execution to deliver an accessible yet fully interactive web experience for visually‑impaired users.
-
+Addressing these gaps motivates the system based on the softwares currently used by the majority of people. Blind and Vision Loss (BLV) users. Using a methodology that consists in a combination of efforts to create a more useful and adaptative tool that can address more issues when navigating web.
 
 
 \section{Proposed System Overview}\label{system}
