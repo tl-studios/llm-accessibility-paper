@@ -260,7 +260,7 @@ As shown in \autoref{fig:show}, the system successfully facilitated user navigat
 
 \section{Findings}
 
-As illustrated in prior research, the principal challenge associated with these technologies is establishing their efficacy across diverse web page contexts \cite{prakash2024, he2024webvoyager}. To analyze and verify the application's efficacy, the authors opted to apply the extension to the ten most accessible websites in Canada as of 2025. Additionally, several websites not ranked among the most visited were included to provide a broader context. The list of websites are presented in \autoref{tab:websites}
+Prior studies underscore that the primary challenge inherent in these technologies lies in demonstrating their effectiveness across a wide array of web page contexts \cite{prakash2024, he2024webvoyager}. To evaluate and confirm the application's efficacy, the authors decided to implement the extension on the 10 most accessible websites in Canada (as reported by SemRush). Furthermore, a selection of additional websites outside the most visited rankings was incorporated to furnish a more comprehensive perspective. The enumeration of these websites is available in \autoref{tab:websites}.
 
 \begin{table}[h]
 \centering
@@ -295,30 +295,8 @@ BMO & Banking & 300K \\
 \end{tabular}
 \end{table}
 
-All websites were accessed 5 times, collecting the following data:
-\begin{itemize}
-    \item Html Size
-    \item Html Size after cleanup 
-    \item JSON Chars Size
-    \item Number of Images
-    \item Number of Images that don't have any alt tag
-    \item Number of images which alt tag char count is more than 240
-    \item Number of possible actions
-    \item WCAG violations
-    \item Time to LLM provide a summary
-    \item Average time to process image
-    \item Number of times that the main task was completed
-\end{itemize}
 
-The efficacy of the system is calculated by the number of times the main task was completed. The main task is defined as the task that the user prompted the system to complete. The system is considered to have completed the task if the user is able to complete the task without any assistance from the system.
-
-Eficacy is calculated by the following formula:
-
-\begin{equation}
-    Eficacy = \frac{Complete task}{Attempted task}\times 100
-\end{equation}
-
-\begin{table*}[t]
+\begin{table*}[ht]
 \centering
 \caption{Website Analysis Results}
 \label{tab:results}
@@ -351,8 +329,30 @@ BMO & 2,452,943 & 368 & 0 & 80 \\
 \end{tabular}
 \end{table*}
 
+All websites were accessed 5 times, collecting the following data:
+\begin{itemize}
+    \item Html Size
+    \item Html Size after cleanup 
+    \item Number of Images
+    \item Number of Images that don't have any alt tag
+    \item Number of images which alt tag char count is more than 240
+    \item Number of possible actions
+    \item WCAG violations
+    \item Time to LLM provide a summary
+    \item Average time to process image
+    \item Number of times that the main task was completed
+\end{itemize}
 
+The efficacy of the system is calculated by the number of times the main task was completed. The main task is defined as the task that the user prompted the system to complete. The system is considered to have completed the task if the user is able to complete the task without any assistance from the system.
 
+The eficacy is calculated using the \autoref{math:eficacy}:
+
+\begin{equation}
+    \label{math:eficacy}
+    Eficacy = \frac{Completion}{Attempts}\times 100
+\end{equation}
+
+The summary of the results collected during the tests can be checked in \autoref{tab:results}
 
 
 
