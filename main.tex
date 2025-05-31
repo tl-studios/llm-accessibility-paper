@@ -260,40 +260,7 @@ As shown in \autoref{fig:show}, the system successfully facilitated user navigat
 
 \section{Tests \& Findings}\label{test}
 
-Prior studies underscore that the primary challenge inherent in these technologies lies in demonstrating their effectiveness across a wide array of web page contexts \cite{prakash2024, he2024webvoyager}. To evaluate and confirm the application's efficacy, the authors decided to implement the extension on the 10 most accessible websites in Canada (as reported by SemRush).\cite{semrumsh} Furthermore, a selection of additional websites outside the most visited rankings was incorporated to furnish a more comprehensive perspective. The enumeration of these websites is available in \autoref{tab:websites}.
-
-\begin{table}[h]
-\centering
-\caption{Websites Analyzed}
-\label{tab:websites}
-\small
-\renewcommand{\arraystretch}{1.3}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|}
-\hline
-\textbf{Website} & \textbf{Category} & \textbf{Monthly Access} \\
-\hline
-Wikipedia & Information & 1.36M \\
-\hline
-Amazon & Shopping & 153M \\
-\hline
-CBC & News & 2M \\
-\hline
-Yahoo & News & 235M \\
-\hline
-NHL & Sports & 11M \\
-\hline
-Realtor & Services & 34M \\
-\hline
-Weather & Information & 769M \\
-\hline
-Apple & Shopping & 188M \\
-\hline
-Indeed & Services & 24M \\
-\hline
-BMO & Banking & 300K \\
-\hline
-\end{tabular}
-\end{table}
+Prior studies underscore that the primary challenge inherent in these technologies lies in demonstrating their effectiveness across a wide array of web page contexts \cite{prakash2024, he2024webvoyager}. To evaluate and confirm the application's efficacy, the authors decided to implement the extension on the 10 most accessible websites in Canada (as reported by SemRush).\cite{semrumsh} Furthermore, a selection of additional websites outside the most visited rankings was incorporated to furnish a more comprehensive perspective. The enumeration of these websites is available in \autoref{tab:results}.
 
 
 \begin{table*}[ht]
@@ -302,29 +269,29 @@ BMO & Banking & 300K \\
 \label{tab:results}
 \small
 \renewcommand{\arraystretch}{1.3}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|}
 \hline
-\textbf{Website} & \textbf{HTML Size in Chars} & \textbf{Number of Images} & \textbf{WCAG Violations} & \textbf{Efficacy \%} \\
+\textbf{Website} & \textbf{Category} & \textbf{Monthly Access} & \textbf{HTML Size} & \textbf{Images} & \textbf{WCAG Violations} & \textbf{Efficacy \%} \\
 \hline
-Wikipedia & 140852 & 23 & 4 & 80 \\
+Wikipedia & Information & 1.36M & 140,852 & 23 & 4 & 80 \\
 \hline
-Amazon & 948,050 & 238 & 53 & 100 \\
+Amazon & Shopping & 153M & 948,050 & 238 & 53 & 100 \\
 \hline
-CBC & 224,808 & 35 & 5 & 40 \\
+CBC & News & 2M & 224,808 & 35 & 5 & 40 \\
 \hline
-Yahoo & 757,533 & 17 & 16 & 0 \\
+Yahoo & News & 235M & 757,533 & 17 & 16 & 0 \\
 \hline
-NHL & 422,463 & 88 & 81 & 60 \\
+NHL & Sports & 11M & 422,463 & 88 & 81 & 60 \\
 \hline
-Realtor & 75,189 & 33 & 51 & 20 \\
+Realtor & Services & 34M & 75,189 & 33 & 51 & 20 \\
 \hline
-Weather & 1,138,290 & 8 & 23 & 100 \\
+Weather & Information & 769M & 1,138,290 & 8 & 23 & 100 \\
 \hline
-Apple & 302,077 & 0 & 3 & 100 \\
+Apple & Shopping & 188M & 302,077 & 0 & 3 & 100 \\
 \hline
-Indeed & 399,086 & 2 & 1 & 40 \\
+Indeed & Services & 24M & 399,086 & 2 & 1 & 40 \\
 \hline
-BMO & 2,452,943 & 368 & 0 & 80 \\
+BMO & Banking & 300K & 2,452,943 & 368 & 0 & 80 \\
 \hline
 \end{tabular}
 \end{table*}
