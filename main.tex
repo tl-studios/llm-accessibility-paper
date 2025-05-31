@@ -36,28 +36,28 @@ Web Accessibility, LLM, Accessibility DOM, Human-Computer Interaction, Context-A
 
 Web accessibility has posed a significant challenge to developers since the inception of web browsers capable of rendering HTML markup into visual pages. The evolution of technology has led to the development of systems such as screen readers, which convert the parsed content into audio descriptions. These descriptions are derived from the interpretation of the website's code. With the increasing adoption of the internet and advancements in modern browser capabilities, innovative techniques have been devised, enabling developers to produce code that enhances both screen-reader capabilities and navigation for users with visual impairments. The World Wide Web Consortium (W3C) was established as a consortium to define standards for the advanced implementation of the internet. While addressing multiple concerns, the organization has proposed standards that are continually evolving to enhance the user experience for individuals with impairments. The Web Content Accessibility Guidelines (WCAG), established in May 1999, provide the foundational guidelines that developers should integrate into their code to improve communication with accessibility tools. Nevertheless, although these guidelines hold the potential to enhance user experience, studies indicate a low (or poor) adoption of these practices. \cite{abuaddous2016web, antonelli2018survey} 
 
-These challenges persist even as awareness and technological capabilities have advanced. Notably, 88\% of websites on the World Wide Web are still not accessible, reflecting a persistent gap between inclusive design principles and their real-world application \cite{webaccess2024, martins2024large}.
+These challenges persist even as awareness and technological capabilities have advanced. Notably, 88\% of websites on the World Wide Web are still not accessible, reflecting a persistent gap between inclusive design principles and their real-world application. \cite{webaccess2024, martins2024large}
 
-Despite the existence of the technologies to convert text into audio and to provide a good navigation experience for impaired users, the reality demonstrates that navigating web could be still a challenge for the avarege impaired person. Another reason for this disconnect lies in the limitations of traditional assistive tools such as screen readers. These systems rely on linear textual content interpretation, which struggles with the complexity and interactivity of modern web experiences—particularly on platforms that depend on multimedia content, multi-step forms, or dynamically updated dashboards. Compounding the issue is the inconsistent implementation of accessibility standards such as the WCAG, most recently updated with WCAG 3.0 in 2024. While these guidelines offer a robust framework for accessible design, their application often falls short due to a lack of developer expertise, improper use of ARIA (Accessible Rich Internet Applications) tags, and a prevailing focus on visual aesthetics rather than semantic clarity \cite{gbd2021, wcagchallenges2025}.
+Despite the existence of the technologies to convert text into audio and to provide a good navigation experience for impaired users, the reality demonstrates that navigating web could be still a challenge for the avarege impaired person. Another reason for this disconnect lies in the limitations of traditional assistive tools such as screen readers. These systems rely on linear textual content interpretation, which struggles with the complexity and interactivity of modern web experiences—particularly on platforms that depend on multimedia content, multi-step forms, or dynamically updated dashboards. Compounding the issue is the inconsistent implementation of accessibility standards such as the WCAG, most recently updated with WCAG 3.0 in 2024. While these guidelines offer a robust framework for accessible design, their application often falls short due to a lack of developer expertise, improper use of ARIA (Accessible Rich Internet Applications) tags, and a prevailing focus on visual aesthetics rather than semantic clarity. \cite{gbd2021, wcagchallenges2025}
 
 Recent advancements in context-aware technologies, including Large Language Models (LLM), Computer Vision, and Machine Learning, present new opportunities for narrowing the accessibility gap. These technologies can augment traditional assistive devices by functioning as intelligent agents, capable of real-time interpretation, restructuring, and interaction with web content. They facilitate the creation of alternative contexts within the accessibility framework, enabling effective content rendering in audio readers and fostering new modes of internet interaction for users with various impairment issues, such as motor disabilities. Such systems can dynamically adapt interfaces to align with users' goals, offering not only improved content understanding but also richer forms of interaction.
 
 In this study, we introduce a browser-based accessibility framework driven by a multi-modal architecture that synergizes vision-language reasoning, contextual manipulation, and dialogue-based task planning. Our framework is realized as an extension compatible with prominent web browsers such as Google Chrome, Safari, and Firefox, on both desktop and mobile platforms. Furthermore, it augments the structural and semantic aspects of web content. This system operates collaboratively across the Document Object Model (DOM) and the browser's Accessibility Tree, equipping visually impaired users with enhanced capabilities for more efficient browsing, comprehension, and interaction with web content.
 
-The remainder of this paper is organized as follows: \autoref{review} reviews related work and accessibility technologies; \autoref{system} details the proposed system and its modular architecture; \autoref{methodology} describes the implementation methodology; \autoref{demo} presents a practical usage scenario demonstrating the system in action; and \autoref{conclusion} concludes with findings, limitations, and directions for future research.
+The subsequent sections of this paper are structured as follows: \autoref{review} undertakes a review of related work and accessibility technologies; \autoref{system} elucidates the proposed system along with its modular architecture; \autoref{methodology} explicates the implementation methodology; \autoref{demo} illustrates a practical usage scenario that demonstrates the system's functionality; \autoref{test} discusses the results obtained from testing the application across a selection of frequently accessed websites, thereby providing insights into the effectiveness of the proposed system; and \autoref{conclusion} concludes with considerations, limitations, and suggestions for future research directions.
 
 
 \section{Literature Review}\label{review}
 
-Multiple studies over the past two decades have documented how screen readers process web pages strictly in a linear sequence, forcing visually‑impaired users to traverse headings, menus, and decorative elements before reaching relevant content. \cite{Ramakrishnan2017-rn, wcagchallenges2025, martins2024large, abuaddous2016web} Large‑scale audits continue to report widespread keyboard‑navigation barriers, even on sites that advertise compliance with success criteria in WCAG 2.x and the 2024 WCAG 3.0 draft \cite{wcagchallenges2025}. 
+Multiple studies over the past two decades have documented how screen readers process web pages strictly in a linear sequence, forcing visually‑impaired users to traverse headings, menus, and decorative elements before reaching relevant content. \cite{Ramakrishnan2017-rn, wcagchallenges2025, martins2024large, abuaddous2016web} Large‑scale audits continue to report widespread keyboard‑navigation barriers, even on sites that advertise compliance with success criteria in WCAG 2.x and the 2024 WCAG 3.0 draft.\cite{wcagchallenges2025}
 
 Empirical user observations show that the absence of semantic grouping leads to excessive keystrokes and cognitive overload when interacting with dashboards, multi‑column news layouts, and e‑commerce grids. Despite incremental improvements in screen‑reader software, the underlying linear traversal model remains unchanged—leaving the fundamental navigational burden on the user. \cite{ferdous2021semantic}
 
 When browsing the internet, users without impairments can efficiently skim through and scan texts, thereby saving time and disregarding irrelevant information. In contrast, individuals who depend on screen-readers and other accessibility tools are deprived of this ability. Consequently, such users must often listen to a substantial portion of content to determine whether to continue seeking information on a particular website. \cite{Ramakrishnan2017-rn} This situation underscores that, despite the increased adoption of relevant guidelines and technological advancements, a more contextual and dynamic approach should be pursued.
 
-Accessible design guidelines require developers to supply meaningful alternative text, ARIA roles, and programmatic relationships, yet field surveys reveal that these elements are either missing or optimized for search‑engine ranking rather than human comprehension \cite{wcag2023}. Where alt text is present, it is often terse ("image1") or redundant with surrounding captions, providing little help in grasping complex visuals such as charts, infographics, or hero banners. Even on sites that partially implement WCAG techniques, dynamic content injected by third‑party ad networks or CMS templates escapes validation, breaking reading order and semantic context \cite{wcagchallenges2025}. As a result, visually‑impaired users must infer meaning from fragments that were never authored with their experience in mind.
+Accessible design guidelines require developers to supply meaningful alternative text, ARIA roles, and programmatic relationships, yet field surveys reveal that these elements are either missing or optimized for search‑engine ranking rather than human comprehension. \cite{wcag2023} Where alt text is present, it is often terse ("image1") or redundant with surrounding captions, providing little help in grasping complex visuals such as charts, infographics, or hero banners. Even on sites that partially implement WCAG techniques, dynamic content injected by third‑party ad networks or CMS templates escapes validation, breaking reading order and semantic context. \cite{wcagchallenges2025} As a result, visually‑impaired users must infer meaning from fragments that were never authored with their experience in mind.
 
-Recent prototypes illustrate how LLM, computer vision, and DOM automation can enrich accessibility beyond traditional screen readers. Commercial and research extensions now parse shopping pages to surface product attributes in a simplified view, reducing navigation steps \cite{prakash2024}. Task‑oriented agents powered by LLMs translate natural‑language commands into browser actions, demonstrating promise in filling out forms, filtering tables, or performing multi‑step tasks  \cite{he2024webvoyager}. While these systems validate the feasibility of AI‑mediated assistance, they remain domain‑specific, rely on brittle heuristics, or lack an integrated mechanism for maintaining conversational context across page transitions.\cite{kodandaram2024,mehendale2024}
+Recent prototypes illustrate how LLM, computer vision, and DOM automation can enrich accessibility beyond traditional screen readers. Commercial and research extensions now parse shopping pages to surface product attributes in a simplified view, reducing navigation steps. \cite{prakash2024} Task‑oriented agents powered by LLMs translate natural‑language commands into browser actions, demonstrating promise in filling out forms, filtering tables, or performing multi‑step tasks. \cite{he2024webvoyager} While these systems validate the feasibility of AI‑mediated assistance, they remain domain‑specific, rely on brittle heuristics, or lack an integrated mechanism for maintaining conversational context across page transitions.\cite{kodandaram2024,mehendale2024}
 
 Principal investigations are concentrated on employing a visual compiler methodology, wherein the context derived from 'screenshots' serves as the primary element for parsing page content, facilitating alterations to the webpage, or enabling user navigation with the support of auxiliary LLM tools. Although screenshots offer a comprehensive understanding of the page's context, LLMs interact with textual data, establishing a paradigm in which their application is not optimized for textual analysis. The primary applications proposed herein is deficient in its capacity to integrate seamlessly into the conventional workflow of an internet user. As an independent application, while it addresses certain aspects of the problem, it simultaneously engenders a new challenge by eschewing the utilization of browsers as its principal mechanism. \cite{he2024webvoyager, mehendale2024, prakash2024}
 
@@ -66,9 +66,9 @@ Principal investigations are concentrated on employing a visual compiler methodo
 Taken together, the literature confirms that technical progress has not yet resolved several critical barriers:
 
 \begin{enumerate}
-\item \textbf{Non‑linear navigation is still unsupported.} Screen readers continue to expose content in a purely sequential manner, forcing users through irrelevant elements before they reach task‑relevant information \cite{Babu_2013}.  
-\item \textbf{Semantic context for visual content is insufficient.} Alt text and ARIA labels are inconsistently authored, providing at best superficial descriptions that fail to convey rich visual meaning \cite{Chintalapati_2022}.  
-\item \textbf{General‑purpose, task‑driven interaction remains elusive.} AI‑augmented tools demonstrate success in narrow domains but do not yet offer a unified solution for complex, cross‑site workflows \cite{prakash2024,kodandaram2024,mehendale2024}.  
+\item \textbf{Non‑linear navigation is still unsupported.} Screen readers continue to expose content in a purely sequential manner, forcing users through irrelevant elements before they reach task‑relevant information. \cite{Babu_2013} 
+\item \textbf{Semantic context for visual content is insufficient.} Alt text and ARIA labels are inconsistently authored, providing at best superficial descriptions that fail to convey rich visual meaning. \cite{Chintalapati_2022}
+\item \textbf{General‑purpose, task‑driven interaction remains elusive.} AI‑augmented tools demonstrate success in narrow domains but do not yet offer a unified solution for complex, cross‑site workflows.\cite{prakash2024,kodandaram2024,mehendale2024} 
 \end{enumerate}
 
 Addressing these gaps requires a comprehensive approach that builds upon existing assistive technologies while introducing innovative solutions. Our work focuses on developing a system that leverages the widespread adoption of screen readers and browser extensions among Blind and Vision Loss (BLV) users. By combining established accessibility tools with advanced AI capabilities, we aim to create a more adaptive and intuitive navigation experience.Our approach is further distinguished by employing browsers as the primary framework for developing functionalities that seamlessly integrate with the existing workflow of users, thereby facilitating adoption and enhancing the ease of website interaction. 
@@ -77,7 +77,7 @@ This methodology integrates multiple layers of assistance: enhancing semantic un
 
 \section{Proposed System Overview}\label{system}
 
-While browsing the internet, users rely on software applications capable of facilitating data exchange with cloud servers via the Hypertext Transfer Protocol (HTTP), ultimately acquiring Hypertext content formatted in Hypertext Markup Language (HTML). These applications convert the textual representation of web pages into a visual format. These software applications are denominated as web browsers. At present, Google Chrome constitutes the primary browser utilized within desktop environments, accounting for a 66\% market share. Conversely, Safari is predominantly used on mobile platforms employed by 22\%  of mobile users\cite{browserstats2025}.
+While browsing the internet, users rely on software applications capable of facilitating data exchange with cloud servers via the Hypertext Transfer Protocol (HTTP), ultimately acquiring Hypertext content formatted in Hypertext Markup Language (HTML). These applications convert the textual representation of web pages into a visual format. These software applications are denominated as web browsers. At present, Google Chrome constitutes the primary browser utilized within desktop environments, accounting for a 66\% market share. Conversely, Safari is predominantly used on mobile platforms employed by 22\%  of mobile users.\cite{browserstats2025}
 
 Web browsers have evolved to facilitate applications that function in conjunction with the product through the utilization of browser APIs. These applications, known as extensions, are installable within browsers and serve to augment the overall capabilities of the browser. Extensions enable developers to create enhancements for standard navigation, facilitating features such as text grammar correction, ad blockers, and other mechanisms. In this project, extensions are employed to interact with the DOM, which is the technical representation of elements on a web page in browsers, as well as the Accessibility Tree, which shares the same representation but is focused on what screen readers (SR) mechanisms utilize to convert content for visually impaired users.
 
@@ -258,9 +258,9 @@ User can now interact with the page either using it's own navigation or by chati
 As shown in \autoref{fig:show}, the system successfully facilitated user navigation to a new page, where now users need to select seats and perform payment. It is imperative to consider that in subsequent versions of this application, the CPM should be capable of continue executing tasks on new pages to ensure the continual achievement of the targeted user objective. Due the time constrains the team yet not developed the continuously loop over tasks and pages. Being part of the scope for future implementations.
 
 
-\section{Findings}
+\section{Tests \& Findings}\label{test}
 
-Prior studies underscore that the primary challenge inherent in these technologies lies in demonstrating their effectiveness across a wide array of web page contexts \cite{prakash2024, he2024webvoyager}. To evaluate and confirm the application's efficacy, the authors decided to implement the extension on the 10 most accessible websites in Canada (as reported by SemRush). Furthermore, a selection of additional websites outside the most visited rankings was incorporated to furnish a more comprehensive perspective. The enumeration of these websites is available in \autoref{tab:websites}.
+Prior studies underscore that the primary challenge inherent in these technologies lies in demonstrating their effectiveness across a wide array of web page contexts \cite{prakash2024, he2024webvoyager}. To evaluate and confirm the application's efficacy, the authors decided to implement the extension on the 10 most accessible websites in Canada (as reported by SemRush).\cite{semrumsh} Furthermore, a selection of additional websites outside the most visited rankings was incorporated to furnish a more comprehensive perspective. The enumeration of these websites is available in \autoref{tab:websites}.
 
 \begin{table}[h]
 \centering
@@ -274,7 +274,7 @@ Prior studies underscore that the primary challenge inherent in these technologi
 \hline
 Wikipedia & Information & 1.36M \\
 \hline
-Amazon.ca & Shopping & 153M \\
+Amazon & Shopping & 153M \\
 \hline
 CBC & News & 2M \\
 \hline
@@ -282,13 +282,13 @@ Yahoo & News & 235M \\
 \hline
 NHL & Sports & 11M \\
 \hline
-Realtor.ca & Services & 34M \\
+Realtor & Services & 34M \\
 \hline
-Weather.com & Information & 769M \\
+Weather & Information & 769M \\
 \hline
-Apple.com & Shopping & 188M \\
+Apple & Shopping & 188M \\
 \hline
-Indeed.com & Services & 24M \\
+Indeed & Services & 24M \\
 \hline
 BMO & Banking & 300K \\
 \hline
@@ -308,7 +308,7 @@ BMO & Banking & 300K \\
 \hline
 Wikipedia & 140852 & 23 & 4 & 80 \\
 \hline
-Amazon.ca & 948,050 & 238 & 53 & 100 \\
+Amazon & 948,050 & 238 & 53 & 100 \\
 \hline
 CBC & 224,808 & 35 & 5 & 40 \\
 \hline
@@ -316,20 +316,20 @@ Yahoo & 757,533 & 17 & 16 & 0 \\
 \hline
 NHL & 422,463 & 88 & 81 & 60 \\
 \hline
-Realtor.ca & 75,189 & 33 & 51 & 20 \\
+Realtor & 75,189 & 33 & 51 & 20 \\
 \hline
-Weather.com & 1,138,290 & 8 & 23 & 100 \\
+Weather & 1,138,290 & 8 & 23 & 100 \\
 \hline
-Apple.com & 302,077 & 0 & 3 & 100 \\
+Apple & 302,077 & 0 & 3 & 100 \\
 \hline
-Indeed.com & 399,086 & 2 & 1 & 40 \\
+Indeed & 399,086 & 2 & 1 & 40 \\
 \hline
 BMO & 2,452,943 & 368 & 0 & 80 \\
 \hline
 \end{tabular}
 \end{table*}
 
-All websites were accessed 5 times, collecting the following data:
+Each website was accessed five times, and data were collected accordingly. A summary of the most pertinent data is available in \autoref{tab:results}.
 \begin{itemize}
     \item Html Size
     \item Html Size after cleanup 
@@ -352,30 +352,51 @@ The eficacy is calculated using the \autoref{math:eficacy}:
     Eficacy = \frac{Completion}{Attempts}\times 100
 \end{equation}
 
-The summary of the results collected during the tests can be checked in \autoref{tab:results}
+The summary of the results collected during the tests can be checked in \autoref{tab:results}. When analyzing the results while using the application we could notice an improve of the auxiliary navigation, and also the increase of context provided by the images text alternative property. Specially in websites with large use of images like BMO. Some websites still insists in the use of non parsable techniques to reproduce images like apple using svg and majorly animations and videos, making it impossible to parse the content. Altough, their good use of WCAG guidelines implementation could provide a good experience, translated in the capacity of the system to execute prompted tasks.
 
+Upon evaluating, solely moderate to weak associations were discernible between the implementation of WCAG guidelines on a website and the system's capacity to execute tasks. As evidenced in \autoref{fig:violations}, there is a moderate correlation between the number of accessibility errors on websites and the capability to complete tasks. This indicates that websites with superior accessibility are more readily comprehensible and processable by LLM systems to accomplish tasks. Although our system endeavors to address these issues, at the preliminary stages of implementation, it can still be inferred that adherence to these guidelines will enhance efficacy.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{images/eficiencexerrors.png}
+    \caption{Eficiency x WCAG violations}
+    \label{fig:violations}
+\end{figure}
 
+\autoref{fig:Complexity} illustrates another correlation, namely the relationship between website complexity, quantified by the number of characters constituting the HTML, and task completion efficacy. Websites with increased content can pose a challenge for LLM systems, particularly due to the requirement for greater processing power to engage with extensive content. While larger website sizes may represent a potential issue, the techniques employed in this prototype effectively distill the necessary content, thereby reducing the data volume transmitted to the model. Additionally, more complex websites offer greater interactivity opportunities and provide more contextual information to their interactive elements, which can enhance the environment for task completion.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{images/efficiencexcomplexity.png}
+    \caption{Eficiency x Website HTML Size (Complexity)}
+    \label{fig:Complexity}
+\end{figure}
+
+During tests, developers could notice that fine-tuning the models can be necessary due to the hallucinations that the LLM model is susceptible to. In addition, developers could understand the correlation of the different types of data and how to increase the LLM capability to understand the context. 
+
+For the purposes of this study, the developers opted to employ the GPT 4.1 model, due to its speed and ease of implementation. The utilization of OpenAI SDKs facilitated a straightforward deployment of the LLMs model; however, it also introduced a challenge owing to the company's imposition of restrictions on the number of tokens processed per minute, which are dependent on the account tier of the organization. As our organization is categorized under tier 1, we were constrained by a limit of 200,000 tokens per minute, thereby posing a challenge to reduce the volume of data submitted to the model with each instance. For future research, developers recommend experimentation with alternative models, as well as an enhancement of the organization's tier status, to fully leverage the tool's capabilities.
 \section{Conclusion}\label{conclusion}
 
-This paper has addressed critical and persistent accessibility challenges experienced by BLV navigating web. Through integrating advances in LLMs, computer vision, and dynamic DOM manipulation, we introduced a multimodal accessibility system designed as a browser extension to significantly enhance web interaction experiences for visually impaired users.
+This paper has addressed critical and persistent accessibility challenges experienced by impaired users navigating web. Through integrating advances in LLMs, computer vision, and dynamic DOM manipulation, we introduced a multi-modal accessibility system designed as a browser extension to significantly enhance web interaction experiences for visually impaired users.
 
-Our architecture uniquely combines four core modules—VLI, CME, CPM, and MIE to collaboratively parse visual and semantic content, dynamically reorganize web page structures, conduct intent-based conversational planning, and automate complex web interactions. The prototype demonstration using the Ticketmaster's webpage highlighted the system's practical capability to simplify complex navigation tasks, enhance semantic comprehension through improved alt text and ARIA labels, and successfully execute user-driven tasks such as information retrieval and ticket purchases.
+Our architecture uniquely combines four core modules as the VLI, CME, CPM, and MIE to collaboratively parse visual and semantic content, dynamically reorganize web page structures, extract main elements, conduct intent-based conversational planning, and automate complex web interactions. The prototype demonstration using the Ticketmaster's webpage highlighted the system's practical capability to simplify complex navigation tasks, enhance semantic comprehension through improved alt text and ARIA labels, and successfully execute user-driven tasks such as information retrieval and ticket purchases.
 
-However, despite its promising outcomes, several practical and technical limitations have been identified. First, the computational costs associated with real-time inference of LLM and computer vision models remain high, necessitating server resources equipped with high-performance GPUs (Graphics Processing Unit). Second, latency introduced by inter-module communication and iterative page rendering may affect usability during extensive interactions. Third, the prototype's ability to generalize its effectiveness across diverse web structures and complex dynamic websites requires further development and validation.
+The results obtained from dynamic testing involving ten pertinent sites in Canada indicated that while the system exhibits efficiency in task execution, it occasionally manifests hallucinations, leading to incomplete task performance and inaccuracies in modifying the DOM. These findings underscore the need to evaluate additional language models beyond GPT-4.1 and highlight the pursuit of models capable of processing larger datasets and accommodating more extensive contextual information.
+
+However, despite its promising outcomes, several practical and technical limitations have been identified. First, the computational costs associated with real-time inference of LLM and computer vision models remain high, necessitating server resources equipped with high-performance GPUs (Graphics Processing Unit). Second, latency introduced by inter-module communication and iterative page rendering may affect usability during extensive interactions. Third, the prototype's ability to generalize its effectiveness across diverse web structures and complex dynamic websites requires further development and validation. Finally the capacity of the system to navigate multiple web-pages of the same site adding information to the context window, making it more difficult for the system to parse information. 
 
 Future research directions are clear and critical for achieving broader adoption and usability. Optimizing system performance and reducing computational demands through more efficient inference methods and specialized LLM fine-tuning specifically for accessibility tasks are immediate priorities. The research and develop also aims into implementing features like continuously task executer, multi-language contexts and video parser.
 
 Ultimately, while technical innovation forms the core of our approach, the broader vision remains creating a universally accessible internet. Emphasizing user-centered iterative development, ongoing collaboration, and inclusive design principles will ensure that advancements in AI technology translate meaningfully into equitable digital experiences for all users.
 
 
-\section{Use of AI Disclosure}\label{ai-disclosure}
+\section*{Use of AI Disclosure}\label{ai-disclosure}
 No artificial intelligence tools were employed in the generation of the content presented in this document. Throughout the drafting process, the Overleaf AI Assistant was utilized to review grammatical accuracy and to offer feedback on writing style and consistency, thereby suggesting improvements to the text and making modifications to the content. During the coding phase of the project, Claude AI, version 3.5, was employed to assist developers in coding tasks and error resolution.
 
 
-\section{Acknowledgments}\label{ai-disclosure}
-The authors extend their sincere gratitude to the members of the Algoma University Digital Innovation Lab and the anonymous reviewers for their insightful feedback on the initial drafts of this paper. Additionally, the contributions of Lucas Radaelli and Nadya Feijo, as representatives of the visually impaired community, are duly acknowledged.
+\section*{Acknowledgments}\label{ai-disclosure}
+The authors extend their sincere gratitude to the members of the Digital Innovation Lab at Algoma University and the anonymous reviewers for their insightful feedback on the initial drafts of this paper. Additionally, the contributions of Lucas Radaelli and Nadya Feijo, as representatives of the visually impaired community, are duly acknowledged.
 
+\vfill
 % References
 \bibliographystyle{unsrt}
 \bibliography{references}
